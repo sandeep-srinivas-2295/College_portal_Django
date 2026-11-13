@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BCA Portal - Subjects</title>
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="{% url 'student-home' %}">Home</a>
+            <a href="{% url 'student-courses' %}">Courses</a>
+        </nav>
+        <hr>
+        <h1>BCA Semester Subjects</h1>
+        <ul>
+            {% for subject in subject_list %}
+                <li>{{ subject }}</li>
+            {% empty %}
+                <li>No subjects assigned yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
