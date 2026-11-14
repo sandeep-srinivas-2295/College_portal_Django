@@ -1,0 +1,12 @@
+{% extends 'students/base.html' %}
+
+{% block title %}BCA Portal - Register{% endblock %}
+
+{% block content %}
+    <h1>Register New BCA Student</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Student</button>
+    </form>
+{% endblock %}

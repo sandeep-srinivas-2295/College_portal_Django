@@ -1,30 +1,21 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>BCA Portal - Students</title>
-    <link rel="stylesheet" href="{% static 'students/style.css' %}">
-</head>
-<body>
-    <div class="container">
-        <nav>
-            <a href="{% url 'student-home' %}">Students</a>
-            <a href="{% url 'student-courses' %}">Courses</a>
-            <a href="/admin/">Admin Panel</a>
-        </nav>
-        <hr>
-        <h1>Registered BCA Students</h1>
-        <ul>
-            {% for student in students %}
-                <li>
-                    <strong>{{ student.roll_number }}</strong> — {{ student.full_name }} 
-                    (Sem {{ student.semester }} | {{ student.email }})
-                </li>
-            {% empty %}
-                <li>No students found in the database. Add some from the Admin Panel!</li>
-            {% endfor %}
-        </ul>
-    </div>
-</body>
-</html>
+{% extends 'students/base.html' %}
+
+{% block title %}BCA Portal - Students{% endblock %}
+
+{% block content %}
+    <h1>Registered BCA Students</h1>
+    <ul>
+        {% for student in students %}
+            <li>
+                <strong>{{ student.roll_number }}</strong> — {{ student.full_name }}
+                (Sem {{ student.semester }} | {{ student.email }})
+                <span style="float: right;">
+                    <a href="{% url 'student-edit' student.pk %}">Edit</a> |
+                    <a href="{% url 'student-delete' student.pk %}" style="color: #dc2626;">Delete</a>
+                </span>
+            </li>
+        {% empty %}
+            <li>No students found. <a href="{% url 'student-register' %}">Register one now!</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
